@@ -32,11 +32,12 @@ public class ALTester{
     arrTheFuchs.add(23);
 
     System.out.println( arrTheFuchs );
+    System.out.println(isSorted(arrTheFuchs));
 
 
   }
 
-  public boolean isSorted(ArrayList<Integer> toBeSorted){
+  public static boolean isSorted(ArrayList<Integer> toBeSorted){
     for (int i=1;i<toBeSorted.size();i++){
       if(toBeSorted.get(i)<toBeSorted.get(i-1)) {
         return false;

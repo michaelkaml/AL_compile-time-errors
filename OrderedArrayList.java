@@ -29,22 +29,25 @@ public class OrderedArrayList
 
   public String toString()
   {
+    return _data.toString();
 
   }
 
   public Integer remove( int i )
   {
-
+    Integer value = _data.get(i);
+    _data.remove(i);
+    return value;
   }
 
   public int size()
   {
-
+    return _data.size();
   }
 
   public Integer get( int i )
   {
-
+    return _data.get(i);
   }
 
   // inserts newVal at the appropriate index
@@ -52,7 +55,7 @@ public class OrderedArrayList
   // uses a linear search to find appropriate index
   public void addLinear(Integer newVal)
   {
-
+    for(int i=0;i<_data.size;i++);
   }
 
   // inserts newVal at the appropriate index
@@ -61,15 +64,14 @@ public class OrderedArrayList
   public void addBinary(Integer newVal)
   {
 
-  }	
+  }
 
   // main method solely for testing purposes
   public static void main( String[] args )
   {
-    /*-----v-------move-me-down-----------------v--------
-
     OrderedArrayList Franz = new OrderedArrayList();
 
+    /*-----v-------move-me-down-----------------v--------
     // testing linear search
     for( int i = 0; i < 15; i++ )
       Franz.addLinear( (int)( 50 * Math.random() ) );
@@ -77,9 +79,10 @@ public class OrderedArrayList
 
     // testing binary search
     Franz = new OrderedArrayList();
-    for( int i = 0; i < 15; i++ ) 
+    for( int i = 0; i < 15; i++ ){
       Franz.addBinary( (int)( 50 * Math.random() ) );
-    System.out.println( Franz );
+    }
+  System.out.println( Franz );
       =====^====================================^=========*/
 
   }//end main()
