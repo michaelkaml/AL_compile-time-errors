@@ -36,6 +36,15 @@ public class ALTester{
 
   }
 
+  public boolean isSorted(ArrayList<Integer> toBeSorted){
+    for (int i=1;i<toBeSorted.size();i++){
+      if(toBeSorted.get(i)<toBeSorted.get(i-1)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 
 
 }
