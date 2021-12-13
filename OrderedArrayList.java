@@ -24,7 +24,7 @@ public class OrderedArrayList
   // initializes instance variables
   public OrderedArrayList()
   {
-
+	_data = new ArrayList<Integer>();
   }
 
   public String toString()
@@ -55,7 +55,19 @@ public class OrderedArrayList
   // uses a linear search to find appropriate index
   public void addLinear(Integer newVal)
   {
-    for(int i=0;i<_data.size;i++);
+  if(size() == 0){
+  	_data.add(newVal);
+  }
+    for(int i=0;i<size();i++){
+    	if(get(i)>= newVal){
+    	_data.add(i,newVal);
+    	return;
+    	}
+    	
+    	
+    
+    }
+    _data.add(newVal);
   }
 
   // inserts newVal at the appropriate index
@@ -63,19 +75,45 @@ public class OrderedArrayList
   // uses a binary search to find appropriate index
   public void addBinary(Integer newVal)
   {
+	int lower = 0;
+	int upper = size() - 1;
+	int mid, a;
 
+	if (size() == 0) {
+		_data.add(newVal);
+		return;
+	}
+
+	while (upper >= lower) {
+		mid = (upper + lower) / 2;
+		a = newVal - _data.get(mid);
+		
+		if (a < 0) {
+			upper = mid - 1;
+		} else if (a > 0) {
+			lower = mid + 1;
+		} else {
+			_data.add(mid, newVal);
+			return;
+		}
+	}
+	_data.add(lower, newVal);
+	return;
   }
+  	
+  
 
   // main method solely for testing purposes
   public static void main( String[] args )
   {
     OrderedArrayList Franz = new OrderedArrayList();
 
-    /*-----v-------move-me-down-----------------v--------
     // testing linear search
+    
     for( int i = 0; i < 15; i++ )
       Franz.addLinear( (int)( 50 * Math.random() ) );
     System.out.println( Franz );
+    
 
     // testing binary search
     Franz = new OrderedArrayList();
@@ -83,8 +121,9 @@ public class OrderedArrayList
       Franz.addBinary( (int)( 50 * Math.random() ) );
     }
   System.out.println( Franz );
-      =====^====================================^=========*/
 
   }//end main()
 
 }//end class OrderedArrayList
+
+

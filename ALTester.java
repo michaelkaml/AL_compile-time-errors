@@ -7,9 +7,9 @@ public class ALTester{
 
     ArrayList<Integer> arrTheFuchs = new ArrayList<Integer>();
 
+    arrTheFuchs.add(1);
     arrTheFuchs.add(2);
     arrTheFuchs.add(3);
-    arrTheFuchs.add(1);
     arrTheFuchs.add(4);
     arrTheFuchs.add(5);
     arrTheFuchs.add(6);
