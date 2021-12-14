@@ -1,5 +1,5 @@
-// Clyde "Thluffy" Sinclair
-// APCS pd00
+// CTE = Salaj Rijal, Michael Kamela, Ariel Fuchs
+// APCS pd 7
 // Lab02
 // 2021-12-13
 
@@ -9,7 +9,6 @@
  * maintains invariant that elements are ordered (ascending)
  * (SKELETON)
  **********************************************/
-
 
 import java.util.ArrayList;
 
@@ -24,13 +23,13 @@ public class OrderedArrayList
   // initializes instance variables
   public OrderedArrayList()
   {
-	_data = new ArrayList<Integer>();
+  	_data = new ArrayList<Integer>();
   }
 
+  // smaller methods
   public String toString()
   {
     return _data.toString();
-
   }
 
   public Integer remove( int i )
@@ -50,23 +49,26 @@ public class OrderedArrayList
     return _data.get(i);
   }
 
+  // big boi methods
+
   // inserts newVal at the appropriate index
   // maintains ascending order of elements
   // uses a linear search to find appropriate index
   public void addLinear(Integer newVal)
   {
-  if(size() == 0){
-  	_data.add(newVal);
-  }
-    for(int i=0;i<size();i++){
-    	if(get(i)>= newVal){
-    	_data.add(i,newVal);
-    	return;
-    	}
-    	
-    	
-    
+    //check if there are any elements in data
+    if(size() == 0){
+    	_data.add(newVal);
+      return;
     }
+    //loop through data until current val (val at index i) is greater than or equal to newVal
+    for(int i = 0; i < size(); i++){
+      if(get(i)>= newVal){
+    	  _data.add(i,newVal);
+    	  return;
+    	}
+    }
+    //add to the end of the array if no spot found in the middle of the array
     _data.add(newVal);
   }
 
@@ -75,50 +77,72 @@ public class OrderedArrayList
   // uses a binary search to find appropriate index
   public void addBinary(Integer newVal)
   {
-	int lower = 0;
-	int upper = size() - 1;
-	int mid, a;
+    //if no items in array, just add one
+    if( size() == 0 ){
+      _data.add(newVal);
+      return;
+    }
 
-	if (size() == 0) {
-		_data.add(newVal);
-		return;
-	}
+    int start = 0;
+    int end = size()-1;
 
-	while (upper >= lower) {
-		mid = (upper + lower) / 2;
-		a = newVal - _data.get(mid);
-		
-		if (a < 0) {
-			upper = mid - 1;
-		} else if (a > 0) {
-			lower = mid + 1;
-		} else {
-			_data.add(mid, newVal);
-			return;
-		}
-	}
-	_data.add(lower, newVal);
-	return;
+    //edge cases
+    //if belongs in beginning
+    if( get(start) >= newVal ){
+      System.out.println("Inputted at Start");
+      _data.add(start, newVal);
+      return;
+    }
+    //if belongs in end
+    if( get(end) <= newVal){
+      System.out.println("Inputted at End");
+      _data.add(newVal);
+      return;
+    }
+
+    //if belongs somewhere in middle
+    System.out.print("attempting to put in " + newVal);
+    while( (end-start)>0){
+      int middle = (end-start)/2;
+      System.out.print(middle + " ");
+      //check if newVal can be inputted in index middle without disrupting order
+      if( newVal >= get(middle) && newVal <= get(middle+1) ){
+        System.out.println("Inputted in the middle at index: " + middle);
+        _data.add(middle+1, newVal);
+        return;
+      }
+      //if to the left of middle
+      if( newVal < get(middle) ){
+        end = middle;
+      }
+      //if to the right of middle
+      else{
+        start = middle+1;
+      }
+      //System.out.println( start + ": " + get(start) + "\n" + end + ": " + get(end) + "\n" );
+    }
+    
   }
   	
   
-
   // main method solely for testing purposes
   public static void main( String[] args )
   {
     OrderedArrayList Franz = new OrderedArrayList();
 
-    // testing linear search
-    
+    /* testing linear search
     for( int i = 0; i < 15; i++ )
       Franz.addLinear( (int)( 50 * Math.random() ) );
     System.out.println( Franz );
+    */
     
 
     // testing binary search
     Franz = new OrderedArrayList();
     for( int i = 0; i < 15; i++ ){
-      Franz.addBinary( (int)( 50 * Math.random() ) );
+      int randomNumber = (int)(50*Math.random());
+      Franz.addBinary( randomNumber);
+      System.out.println(Franz + " " + randomNumber);
     }
   System.out.println( Franz );
 

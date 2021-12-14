@@ -1,51 +1,41 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ALTester{
-
   public static void main(String[] args) {
 
+    //Normal Array List
     ArrayList<Integer> arrTheFuchs = new ArrayList<Integer>();
 
-    arrTheFuchs.add(1);
-    arrTheFuchs.add(2);
-    arrTheFuchs.add(3);
-    arrTheFuchs.add(4);
-    arrTheFuchs.add(5);
-    arrTheFuchs.add(6);
-    arrTheFuchs.add(7);
-    arrTheFuchs.add(8);
-    arrTheFuchs.add(9);
-    arrTheFuchs.add(10);
-    arrTheFuchs.add(11);
-    arrTheFuchs.add(12);
-    arrTheFuchs.add(13);
-    arrTheFuchs.add(14);
-    arrTheFuchs.add(15);
-    arrTheFuchs.add(16);
-    arrTheFuchs.add(17);
-    arrTheFuchs.add(18);
-    arrTheFuchs.add(19);
-    arrTheFuchs.add(20);
-    arrTheFuchs.add(21);
-    arrTheFuchs.add(22);
-    arrTheFuchs.add(23);
+    //Ordered Array List
+    OrderedArrayList michaelKaml = new OrderedArrayList();
 
-    System.out.println( arrTheFuchs );
-    System.out.println(isSorted(arrTheFuchs));
-
-
-  }
-
-  public static boolean isSorted(ArrayList<Integer> toBeSorted){
-    for (int i=1;i<toBeSorted.size();i++){
-      if(toBeSorted.get(i)<toBeSorted.get(i-1)) {
-        return false;
-      }
+    //Add the same randomly generated numbers
+    for(int i = 0; i < 23; i++){
+      int randomNum = (int) (Math.random() * 100);
+      arrTheFuchs.add(randomNum);
+      michaelKaml.addLinear(randomNum);
     }
-    return true;
+
+
+    //Check if ArrayList is Sorted
+    boolean isSorted = false;
+    for( int i = 1; i < arrTheFuchs.size(); i++){
+      isSorted = arrTheFuchs.get(i) >= arrTheFuchs.get(i-1);
+      if(!isSorted) break;
+    }
+
+    System.out.println( "ArrayList:\n" + arrTheFuchs + "\nSorted = " + isSorted); 
+
+    //Check if OrderedArrayList is Sorted
+    isSorted = false;
+    for( int i = 1; i < michaelKaml.size(); i++){
+      isSorted = michaelKaml.get(i) >= michaelKaml.get(i-1);
+      if(!isSorted) break;
+    }
+
+    System.out.println( "\nOrderedArrayList:\n" + michaelKaml + "\nSorted = " + isSorted); 
+
+
   }
-
-
 
 }
