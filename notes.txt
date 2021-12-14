@@ -1,3 +1,5 @@
-TO DO LIST:
--Add our marked up plan
--
+DISCO:
+-You can use built in functions for ArrayList to help make the methods for OrderedArrayList
+
+QCC:
+-How do you implement a binary search algorithm. Would it be best to implement this iteratively or recursively.
