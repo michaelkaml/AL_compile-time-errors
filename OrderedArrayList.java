@@ -77,74 +77,64 @@ public class OrderedArrayList
   // uses a binary search to find appropriate index
   public void addBinary(Integer newVal)
   {
-    //if no items in array, just add one
-    if( size() == 0 ){
+    if( size() == 0){
       _data.add(newVal);
       return;
     }
-
-    int start = 0;
-    int end = size()-1;
-
-    //edge cases
-    //if belongs in beginning
-    if( get(start) >= newVal ){
-      System.out.println("Inputted at Start");
-      _data.add(start, newVal);
+    if( get(0) >= newVal){
+      _data.add(0, newVal);
       return;
-    }
-    //if belongs in end
-    if( get(end) <= newVal){
-      System.out.println("Inputted at End");
-      _data.add(newVal);
-      return;
-    }
-
-    //if belongs somewhere in middle
-    System.out.print("attempting to put in " + newVal);
-    while( (end-start)>0){
-      int middle = (end-start)/2;
-      System.out.print(middle + " ");
-      //check if newVal can be inputted in index middle without disrupting order
-      if( newVal >= get(middle) && newVal <= get(middle+1) ){
-        System.out.println("Inputted in the middle at index: " + middle);
-        _data.add(middle+1, newVal);
-        return;
-      }
-      //if to the left of middle
-      if( newVal < get(middle) ){
-        end = middle;
-      }
-      //if to the right of middle
-      else{
-        start = middle+1;
-      }
-      //System.out.println( start + ": " + get(start) + "\n" + end + ": " + get(end) + "\n" );
     }
     
+    if( get( size()-1 ) <= newVal ){
+      _data.add(newVal);
+      return;
+    }
+
+    int hi = size()-1;
+    int lo = 0;
+    int mid = 0;
+
+    int iterations =  1 + (int) (Math.log(hi)/Math.log(2));
+
+    for( int i = 0; i < iterations ; i++){
+      mid = lo + (hi-lo)/2;
+
+      if( get(mid) <= newVal && get(mid+1) >= newVal){
+        _data.add(mid+1, newVal);
+        return;
+      }
+
+      if( newVal < get(mid) ){
+        hi = mid;
+      }
+
+      else{
+        lo = mid;
+      }
+
+    }
   }
   	
   
   // main method solely for testing purposes
   public static void main( String[] args )
   {
+    //Linear
+    OrderedArrayList Ferd = new OrderedArrayList();
+    //Binary
     OrderedArrayList Franz = new OrderedArrayList();
-
-    /* testing linear search
-    for( int i = 0; i < 15; i++ )
-      Franz.addLinear( (int)( 50 * Math.random() ) );
-    System.out.println( Franz );
-    */
-    
-
+        
     // testing binary search
     Franz = new OrderedArrayList();
     for( int i = 0; i < 15; i++ ){
       int randomNumber = (int)(50*Math.random());
       Franz.addBinary( randomNumber);
-      System.out.println(Franz + " " + randomNumber);
+      Ferd.addBinary( randomNumber);
     }
-  System.out.println( Franz );
+
+    System.out.println( Franz );
+    System.out.println( Ferd );
 
   }//end main()
 
